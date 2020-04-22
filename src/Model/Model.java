@@ -36,9 +36,9 @@ public void  remuvePoint(Points point)
     p.clear();///полностью очишает массив с точками
     }
 
-    //поиск точки по координатам, если такая есть, то вернется ее индекс в массиве, иначе -1
+
     public int serchPoint(int x, int y){
-        int index = -1;
+        int index = -1;//ищем точку по координатм
         for (int i = 0; i < this.p.size(); i++){
             if (this.p.get(i).x == x && this.p.get(i).y == y) index = i;
         }

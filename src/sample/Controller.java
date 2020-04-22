@@ -1,6 +1,9 @@
 package sample;
 import Model.Model;
 import Model.Points;
+import com.sun.imageio.plugins.png.PNGImageWriter;
+import com.sun.imageio.plugins.png.PNGImageWriterSpi;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -11,11 +14,16 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +39,7 @@ public class Controller implements Initializable {
     public Button lastick;
     public Button NewLine;
     Model model;
+    Points points;
     private GraphicsContext gr;
     //класс для работы с изображениями
     Image bgImage;
@@ -64,18 +73,33 @@ public class Controller implements Initializable {
 //////////////////
     public void sohranit(ActionEvent actionEvent) throws IOException {//сохранение картинки
 
-       FileChooser fileChooser = new FileChooser();//Класс работы с диалогом выборки и сохранения
-        fileChooser.setTitle("Сохранение файла....");//Заголовок диалога
-        FileChooser.ExtensionFilter extFilter =new FileChooser.ExtensionFilter("Картинка", "*.png");//Расширение
-        fileChooser.getExtensionFilters().add(extFilter);
-        File        file = fileChooser.showSaveDialog(canva.getScene().getWindow());//Указываем текущую сцену CodeNote.mainStage
-       BufferedImage bi = new BufferedImage((int)canva.getWidth(),(int)canva.getHeight(),BufferedImage.TYPE_INT_RGB);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Сохранение файла....");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Изображение", "*.png"));
+        File file = fileChooser.showSaveDialog(canva.getScene().getWindow());
+        WritableImage wImage = new WritableImage((int)canva.getWidth(), (int)canva.getHeight());
+        PixelWriter pw = wImage.getPixelWriter();
+        for (int y = 0; y < (int)canva.getHeight(); y++) {
+            for (int x = 0; x < (int)canva.getWidth(); x++){
+                int index = model.serchPoint(x,y);
+                //если индекс текущего массива < 0, т.е. model.serchPoint(x,y) = -1 (такой точки в моделе)
+                if (index < 0) {
+                    //тогда цвет для wImage в данной координате будет прозрачным
+                    pw.setColor(x, y, Color.TRANSPARENT);
+                }
+                else{
+                    //иначе, точка есть в моделе, значит для wImage в данной координате устанавливаем цвет ее цвет
 
+                    pw.setColor(x,y,model.getPoint(index).getColor());
+                }
+            }
+        }
+        //преобразуем WritableImage в BufferedImage
+        BufferedImage image = SwingFXUtils.fromFXImage(wImage, null);
         if (file != null) {
-           ImageIO.write(bi,"png",file);
+            ImageIO.write(image,"png", new FileOutputStream(file));
             System.out.println(" "+file);
         }
-
     }
 
     public void zagruzit(ActionEvent actionEvent) throws FileNotFoundException {

@@ -56,4 +56,5 @@ public class Points extends Point {
         this.wP=wP;
         this.hP=hP;
     }
+
 }

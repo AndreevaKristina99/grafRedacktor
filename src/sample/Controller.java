@@ -49,6 +49,8 @@ public class Controller implements Initializable {
         model=new Model();
         gr = canva.getGraphicsContext2D();
         SliderTol();
+
+
     }
     public void SliderTol() {//толщина линии
         sliders.setMin(1);
@@ -75,7 +77,8 @@ public class Controller implements Initializable {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Сохранение файла....");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Изображение", "*.png"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Изображение", "*.png"),
+                new FileChooser.ExtensionFilter("Изображение", "*.bmp"));
         File file = fileChooser.showSaveDialog(canva.getScene().getWindow());
         WritableImage wImage = new WritableImage((int)canva.getWidth(), (int)canva.getHeight());
         PixelWriter pw = wImage.getPixelWriter();
@@ -106,7 +109,8 @@ public class Controller implements Initializable {
         FileChooser fileChooser = new FileChooser();//класс работы с диалоговым окном
         fileChooser.setTitle("Выберите изображениe...");//заголовок диалога
 //задает фильтр для указанного расшиерения
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Изображение", "*.bmp"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Изображение", "*.png"),
+                new FileChooser.ExtensionFilter("Изображение", "*.bmp"));
 
         File loadImageFile = fileChooser.showOpenDialog(canva.getScene().getWindow());
 

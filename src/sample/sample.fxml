@@ -10,49 +10,50 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="517.0" prefWidth="824.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" prefHeight="394.0" prefWidth="469.0" style="-fx-border-color: yellow;" vgap="10" xmlns="http://javafx.com/javafx/8.0.231" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
-      <ColumnConstraints maxWidth="256.0" minWidth="0.0" prefWidth="201.0" />
-      <ColumnConstraints maxWidth="470.0" minWidth="214.0" prefWidth="269.0" />
+      <ColumnConstraints maxWidth="256.0" minWidth="0.0" prefWidth="144.0" />
+      <ColumnConstraints maxWidth="470.0" minWidth="214.0" prefWidth="321.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints />
    </rowConstraints>
    <children>
-      <Canvas fx:id="canva" height="462.0" onMouseClicked="#clik_canvas" onMouseDragged="#print" width="438.0" GridPane.columnIndex="1" />
-      <ColorPicker fx:id="colorpik">
+      <Canvas fx:id="canva" cache="true" cacheHint="SCALE" height="260.0" onMouseClicked="#clik_canvas" onMouseDragged="#print" style="visibility: red;" width="312.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ColorPicker fx:id="colorpik" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets top="-250.0" />
          </GridPane.margin></ColorPicker>
-      <Button mnemonicParsing="false" onAction="#sohranit" text="Сохранить">
+      <Button mnemonicParsing="false" onAction="#sohranit" text="Сохранить" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets top="-80.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#zagruzit" text="Загрузить">
+      <Button mnemonicParsing="false" onAction="#zagruzit" text="Загрузить" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets top="-150.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#clean" text="Очистить" />
-      <Slider fx:id="sliders">
+      <Button mnemonicParsing="false" onAction="#clean" text="Очистить" GridPane.rowIndex="1" />
+      <Slider fx:id="sliders" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets top="-330.0" />
          </GridPane.margin>
       </Slider>
-      <Label text="Выбеоите ширину линии рисования">
+      <Label text="Выбеоите ширину линии рисования" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets top="-370.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="lastick" mnemonicParsing="false" onAction="#m_lastick_but" text="Линия">
+      <Button fx:id="lastick" mnemonicParsing="false" onAction="#m_lastick_but" text="Линия" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets top="180.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="NewLine" mnemonicParsing="false" onAction="#m_line" text="Ластик">
+      <Button fx:id="NewLine" mnemonicParsing="false" onAction="#m_line" text="Ластик" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets top="80.0" />
          </GridPane.margin></Button>
